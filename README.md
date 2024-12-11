@@ -1,9 +1,31 @@
-# React + Vite
+# Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This is the client-side application built with React and Vite.
 
-Currently, two official plugins are available:
+## Installation
+1. Clone the repository.
+2. Navigate to the client directory:
+   ```bash
+   cd client
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# dear-santa-client
+## Environment Variables
+Create a `.env` file in the client directory with the following content:
+
+```
+VITE_API_URL=http://localhost:3001
+```
+
+## Running the Application
+To start the development server, run:
+```bash
+npm run dev
+```
+
+## Proxy Configuration
+The application is configured to proxy API requests to the backend server running on port 3001.

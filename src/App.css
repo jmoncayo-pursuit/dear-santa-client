@@ -1,0 +1,468 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Berkshire+Swash&family=Gloria+Hallelujah&display=swap');
+
+:root {
+  --christmas-red: #d42426;
+  --christmas-green: #2f5233;
+  --snow-white: #fff;
+  --holly-green: #165B33;
+  --candy-red: #EA4630;
+  --gold: #F6B646;
+  --pine-green: #0B6623;
+  --background-color: #f7f0eb;
+  --text-color: #2c3e50;
+  --kid-font: 'Gloria Hallelujah', cursive;
+  --santa-font: 'Berkshire Swash', cursive;
+  --construction-paper: #ff9b85;
+}
+
+body {
+  background-color: var(--background-color);
+  background-image: 
+    radial-gradient(#e74c3c 1px, transparent 1px),
+    radial-gradient(#27ae60 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  background-attachment: fixed;
+  color: var(--text-color);
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.app {
+  text-align: center;
+}
+
+h1 {
+  color: var(--christmas-red);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 2.5em;
+}
+
+.letter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to bottom,
+    var(--construction-paper) 0%,
+    lighten(var(--construction-paper), 5%) 100%
+  );
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 0 80px rgba(0, 0, 0, 0.1);
+  border: none;
+  position: relative;
+  z-index: 0;
+}
+
+.letter-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: 12px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.letter-form input,
+.letter-form textarea {
+  padding: 0.8rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: var(--kid-font);
+  background-color: var(--snow-white);
+  color: var(--text-color);
+  position: relative;
+  z-index: 1;
+}
+
+.letter-form input {
+  height: 3.5rem;
+  padding: 0 1rem;
+  line-height: normal;
+  background-image: none;
+}
+
+.letter-form textarea {
+  min-height: 200px;
+  padding: 1rem;
+  line-height: 2rem;
+  background-image: linear-gradient(#ddd 1px, transparent 1px);
+  background-size: 100% 2rem;
+  background-position: 0 1rem;
+  background-attachment: local;
+  resize: vertical;
+}
+
+.letter-form input:focus,
+.letter-form textarea:focus {
+  border-color: var(--holly-green);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(47, 82, 51, 0.1);
+}
+
+.letter-form textarea {
+  padding: 1.2rem 1rem;
+  min-height: 200px;
+}
+
+.letters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.letter {
+  text-align: left;
+  padding: 1rem;
+  border: 2px solid var(--holly-green);
+  border-radius: 12px;
+  background: var(--snow-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: 
+    linear-gradient(
+      45deg,
+      rgba(255, 255, 255, .2) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(255, 255, 255, .2) 75%,
+      rgba(255, 255, 255, .2)
+    ),
+    linear-gradient(
+      45deg,
+      rgba(255, 255, 255, .2) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(255, 255, 255, .2) 75%,
+      rgba(255, 255, 255, .2)
+    ),
+    var(--snow-white);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+/* Add envelope styling for closed letters */
+.letter:not(.open)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    var(--snow-white) 0%,
+    var(--snow-white) 49.9%,
+    var(--holly-green) 50%,
+    var(--snow-white) 50.1%,
+    var(--snow-white) 100%
+  );
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.letter:not(.open)::after {
+  content: '✉️';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5em;
+}
+
+.letter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--candy-red);
+}
+
+.letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  background: linear-gradient(to right, var(--holly-green), var(--pine-green));
+  color: var(--snow-white);
+  position: relative;
+  margin: -1rem -1rem 1rem -1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.letter-header h3 {
+  margin: 0;
+  color: var(--snow-white);
+  display: flex;
+  align-items: center;
+}
+
+.toggle-icon {
+  color: var(--gold);
+  font-size: 1em;
+}
+
+.letter-content {
+  overflow: hidden;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #eee;
+}
+
+.child-letter {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: var(--snow-white);
+  border-radius: 8px;
+  border-left: 4px solid var(--candy-red);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.child-letter h4,
+.santa-response h4 {
+  color: var(--christmas-red);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2em;
+}
+
+.santa-response {
+  padding: 1.5rem;
+  background: var(--snow-white);
+  background-image: 
+    linear-gradient(
+      rgba(255, 0, 0, 0.05) 1px, 
+      transparent 1px
+    );
+  background-size: 100% 2rem;
+  border-radius: 8px;
+  border: 2px solid var(--holly-green);
+  position: relative;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.santa-response::before {
+  content: '🎅';
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 1.5em;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+.santa-response h4 {
+  font-family: var(--santa-font);
+  color: var(--holly-green);
+  font-size: 1.5em;
+}
+
+.santa-response p {
+  font-family: var(--santa-font);
+  color: var(--text-color);
+  line-height: 2;
+  font-size: 1.3em;
+  margin: 0;
+  padding: 0;
+}
+
+.letter-date {
+  margin-top: 1rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Animation for opening/closing */
+.letter-content {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error {
+  color: var(--candy-red);
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(234, 70, 48, 0.1);
+  border-radius: 4px;
+}
+
+.no-letters {
+  text-align: center;
+  color: var(--christmas-red);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--snow-white);
+  border-radius: 8px;
+  border: 2px dashed var(--holly-green);
+}
+
+button {
+  background-color: var(--holly-green);
+  color: var(--snow-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background-color: var(--christmas-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Add a stamp-like decoration */
+.letter:not(.open) .letter-header::after {
+  content: '🎄';
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  font-size: 1.5em;
+  transform: rotate(10deg);
+}
+
+/* Style placeholders to look handwritten */
+.letter-form input::placeholder,
+.letter-form textarea::placeholder {
+  font-family: var(--kid-font);
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+/* Remove the paperclip */
+.letter-form::after {
+  display: none;
+}
+
+/* Specific adjustments for the name input */
+.letter-form input {
+  background: #fff;
+  height: 3rem;
+  padding: 0 1rem;
+}
+
+/* Adjust textarea padding */
+.letter-form textarea {
+  padding: 1.2rem 1rem;
+  min-height: 200px;
+}
+
+/* Add some space between lines in the letter content */
+.child-letter p {
+  font-family: var(--kid-font);
+  font-size: 1.2em;
+  color: var(--text-color);
+  line-height: 2.5;
+  margin: 0;
+}
+
+/* Remove these unused icon styles */
+.header-icon,
+.button-icon,
+.letter-icon,
+.empty-icon {
+  display: none;
+}
+
+/* Update existing styles */
+.letter-header h3 {
+  margin: 0;
+  color: var(--snow-white);
+  display: flex;
+  align-items: center;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-letters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add styles for circular icons */
+.santa-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.santa-response::before {
+  content: '';
+  position: absolute;
+  top: -25px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-image: url('/apple-touch-icon.png');
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Update letter header styles */
+.letter:not(.open) .letter-header::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  width: 30px;
+  height: 30px;
+  background-image: url('/apple-touch-icon.png');
+  background-size: cover;
+  border-radius: 50%;
+  transform: rotate(10deg);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
